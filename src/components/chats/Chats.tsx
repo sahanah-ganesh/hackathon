@@ -95,7 +95,8 @@ const Chats: React.FC<Props> = (props) => {
         setMessages(temp2);
       }, 1000);
     }
-  }, [props.sendUserResponse, props.botResponse, messages]);
+    // eslint-disable-next-line
+  }, [props.sendUserResponse, props.botResponse]);
 
   // enable autoscroll after each message
   useEffect(() => {
