@@ -37,7 +37,8 @@
     "eject": "react-scripts eject",
     "start-sw": "http-server ./build",
     "format": "prettier --write 'src/**/*.ts{,x}'",
-    "lint": "tsc --noEmit && eslint 'src/**/*.ts{,x}'"
+    "lint": "tsc --noEmit && eslint 'src/**/*.ts{,x}'",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +59,8 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "eslint": "^7.2.0",
@@ -71,19 +74,8 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^1.7.0",
     "http-server": "^13.0.2",
-    "husky": "7.0.2",
+    "husky": "^7.0.0",
     "lint-staged": "11.1.2",
     "prettier": "^2.4.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.ts": [
-      "eslint --fix",
-      "git add"
-    ]
   }
 }
