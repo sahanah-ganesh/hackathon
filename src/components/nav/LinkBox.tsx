@@ -13,6 +13,15 @@ const Links = styled(Link)`
   }
 `;
 
+const ExternalLink = styled.a`
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  &:hover {
+    color: #259fcd;
+  }
+`;
+
 const LinkBox: React.FC = () => {
   const { t } = useTranslation();
   return (
@@ -26,13 +35,17 @@ const LinkBox: React.FC = () => {
       }}
     >
       <Box mb={3}>
-        <Links to="/help">{t("links.help")}</Links>
+        <ExternalLink target="_blank" href={t("links.urgentHelp")}>
+          {t("links.help")}
+        </ExternalLink>
       </Box>
       <Box mb={3}>
-        <Links to="/violence">{t("links.violence")}</Links>
+        <ExternalLink target="_blank" href={t("links.familyViolence")}>
+          {t("links.violence")}
+        </ExternalLink>{" "}
       </Box>
       <Box mb={3}>
-        <Links to="/how">{t("links.how")}</Links>
+        <Links to="/start">{t("links.start")}</Links>
       </Box>
     </Box>
   );

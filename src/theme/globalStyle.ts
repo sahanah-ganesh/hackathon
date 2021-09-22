@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 100%;
     margin: 0;
-    background-color: #E5E5E5;
+    background-color: #303246;
     font-family: 'Cera Pro',
       sans-serif;
     -webkit-font-smoothing: antialiased;

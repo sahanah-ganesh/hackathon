@@ -29,6 +29,16 @@ const Links = styled(Link)`
   }
 `;
 
+const ExternalLink = styled.a`
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+  font-size: 17px;
+  &:hover {
+    color: #259fcd;
+  }
+`;
+
 export const FacebookLogoImage = styled.img.attrs({
   src: `${FacebookLogo}`,
 })`
@@ -43,7 +53,7 @@ export const FacebookLogoImage = styled.img.attrs({
 export const FooterNav: React.FC = () => {
   const { t } = useTranslation();
   const { width } = useViewport();
-  const breakpoint = 800;
+  const breakpoint = 900;
 
   const openInNewTab = (url: string) => {
     const newWindow = window.open(url, "_blank", "noopener,noreferrer");
@@ -70,9 +80,13 @@ export const FooterNav: React.FC = () => {
       {width > breakpoint ? (
         <Box>
           <Links to="/">{t("links.home")}</Links>
-          <Links to="/help">{t("links.help")}</Links>
-          <Links to="/violence">{t("links.violence")}</Links>
-          <Links to="/how">{t("links.how")}</Links>
+          <ExternalLink target="_blank" href={t("links.urgentHelp")}>
+            {t("links.help")}
+          </ExternalLink>{" "}
+          <ExternalLink target="_blank" href={t("links.familyViolence")}>
+            {t("links.violence")}
+          </ExternalLink>{" "}
+          <Links to="/start">{t("links.start")}</Links>
         </Box>
       ) : (
         <LinkBox />

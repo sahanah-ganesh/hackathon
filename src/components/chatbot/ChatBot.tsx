@@ -1,25 +1,28 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { analysis } from "../../utils/analysis";
+import { Box, Button } from "rebass/styled-components";
+import { Input } from "@rebass/forms";
 import styled from "styled-components";
 import Chats from "../chats/Chats";
 
-const ChatContainer = styled.div`
-  width: 80vw;
+const ChatContainer = styled(Box)`
+  width: 50vw;
   height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 0.5px solid black;
+  border: 0.5px solid white;
   padding: 2em;
   border-radius: 10px;
+  background-color: white;
 `;
 
-const FormContainer = styled.form`
+const FormContainer = styled(Box)`
   display: flex;
   justify-content: space-between;
 `;
 
-const TextInput = styled.input`
+const TextInput = styled(Input)`
   width: 92%;
   border-style: none;
   border: 0.5px solid black;
@@ -31,7 +34,7 @@ const TextInput = styled.input`
   }
 `;
 
-const Button = styled.button`
+const SendButton = styled(Button)`
   background: grey;
   color: black;
   border-style: none;
@@ -95,12 +98,15 @@ const ChatBot = (): JSX.Element => {
         sendUserResponse={sendUserResponse}
         optionClick={optionClick}
       />
-      <FormContainer onSubmit={(e) => handleSubmit(e)}>
+      <FormContainer
+        as="form"
+        onSubmit={(e: FormEvent<HTMLFormElement>): void => handleSubmit(e)}
+      >
         <TextInput
           onChange={(e) => handleInputChange(e)}
           value={userResponse}
         ></TextInput>
-        <Button>Send</Button>
+        <SendButton>Send</SendButton>
       </FormContainer>
     </ChatContainer>
   );

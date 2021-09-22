@@ -1,21 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Box, Text } from "rebass/styled-components";
 import styled from "styled-components";
 
-const Dummy = styled.div`
+const Dummy = styled(Box)`
   padding: 0.5em 0;
 `;
 
-const MessageContainer = styled.div`
+const MessageContainer = styled(Box)`
   overflow-y: scroll;
   margin-bottom: 2em;
 `;
 
-const MessageWrapper = styled.div`
+const MessageWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
 `;
 
-const UserMessage = styled.div`
+const UserMessage = styled(Box)`
   max-width: 400px;
   padding: 0.5em;
   border-radius: 17px;
@@ -25,7 +26,7 @@ const UserMessage = styled.div`
   align-self: flex-end;
 `;
 
-const BotMessage = styled.div`
+const BotMessage = styled(Box)`
   max-width: 400px;
   padding: 0.5em;
   border-radius: 17px;
@@ -35,13 +36,13 @@ const BotMessage = styled.div`
   align-self: flex-start;
 `;
 
-const Options = styled.div`
+const Options = styled(Box)`
   background: white;
   display: flex;
   align-items: center;
 `;
 
-const Text = styled.p`
+const ChatText = styled(Text)`
   margin-right: 0.8em;
   border-radius: 17px;
   &:hover {
@@ -114,7 +115,7 @@ const Chats: React.FC<Props> = (props) => {
         <MessageWrapper key={chat.message}>
           {chat.sender === "user" ? (
             <UserMessage key={chat.sender}>
-              <Text>{chat.message}</Text>
+              <ChatText>{chat.message}</ChatText>
             </UserMessage>
           ) : (
             <BotMessage key={chat.sender}>
@@ -124,13 +125,13 @@ const Chats: React.FC<Props> = (props) => {
           {chat.options ? (
             <Options>
               {chat.options.map((option) => (
-                <Text
+                <ChatText
                   onClick={(e) => props.optionClick(e)}
                   data-id={option}
                   key={option}
                 >
                   {option}
-                </Text>
+                </ChatText>
               ))}
             </Options>
           ) : null}

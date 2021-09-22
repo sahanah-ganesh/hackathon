@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -34,6 +34,17 @@ const Links = styled(Link)`
   }
 `;
 
+const ExternalLink = styled.a`
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  :hover {
+    color: #95b5dd;
+  }
+`;
+
 const Menu = () => {
   const { t } = useTranslation();
   const [open, setOpen] = useState<boolean>(false);
@@ -45,9 +56,13 @@ const Menu = () => {
     <div ref={node}>
       <StyledMenu open={open}>
         <Links to="/">{t("links.home")}</Links>
-        <Links to="/help">{t("links.help")}</Links>
-        <Links to="/violence">{t("links.violence")}</Links>
-        <Links to="/how">{t("links.how")}</Links>
+        <ExternalLink target="_blank" href={t("links.urgentHelp")}>
+          {t("links.help")}
+        </ExternalLink>
+        <ExternalLink target="_blank" href={t("links.familyViolence")}>
+          {t("links.violence")}
+        </ExternalLink>{" "}
+        <Links to="/start">{t("links.start")}</Links>
       </StyledMenu>
       <Hamburger open={open} setOpen={setOpen} />
     </div>

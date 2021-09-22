@@ -3,7 +3,10 @@ export const en = {
     home: "Home",
     help: "Urgent help",
     violence: "What is family violence?",
-    how: "How it works",
+    start: "Get started",
+    urgentHelp: "https://www.kidsfirstaustralia.org.au/need-urgent-help",
+    familyViolence:
+      "https://www.kidsfirstaustralia.org.au/page/Family-violence--The-Orange-Door",
   },
   homeScreen: {
     what: "What is it?",
@@ -12,5 +15,6 @@ export const en = {
   },
   buttons: {
     go: "Get started",
+    update: "There's a new version. Click here to update",
   },
 };
