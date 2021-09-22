@@ -1,9 +1,9 @@
-import ChatBot from "../../components/chatbot/ChatBot";
+import Layout from "../../components/layout/Layout";
 
 const Home = (): JSX.Element => {
   return (
     <>
-      <ChatBot />
+      <Layout />
     </>
   );
 };

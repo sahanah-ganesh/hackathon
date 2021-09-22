@@ -2,17 +2,18 @@ export const analysis = (step: number, userResponse: string) => {
   return step === 0
     ? {
         purpose: "intro",
-        message: `Hi, ${userResponse}! It's the Kid First team here. What do you need help with?`,
-        options: ["Family violence", "Mental health"],
+        message: `Hi, it's the We Got You team here. Do you need help...?`,
+        options: ["Now", "Later"],
       }
     : step === 1
-    ? userResponse === "Family violence"
+    ? userResponse === "Now"
       ? {
-          purpose: "family violence",
-          message: `Thanks for telling me that.`,
+          purpose: "Now",
+          message: `Is your or anyone else in immediate danger?`,
+          options: ["Yes", "Soon", "Later"],
         }
       : {
-          purpose: "mental health",
+          purpose: "Later",
           message: "I am so sorry to hear that. Who needs help?",
           options: ["Me", "Someone else"],
         }

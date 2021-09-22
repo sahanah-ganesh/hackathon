@@ -1,21 +1,46 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+  withRouter,
+} from "react-router-dom";
 import GlobalStyle from "./theme/globalStyle";
-import Home from "./pages/home/home";
+import { ViewportProvider } from "./hooks/useViewport";
 
-const App = (): JSX.Element => {
+/* cra built upon webpack with support for code splitting
+lazily load components with suspense while waiting for dynamic imports */
+const Home = lazy(() => import("./pages/home/home"));
+
+function _ScrollToTop(props: any) {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return props.children;
+}
+
+const ScrollToTop = withRouter(_ScrollToTop);
+
+function App() {
   return (
-    <>
+    <ViewportProvider>
       <GlobalStyle />
       <Router>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Switch>
-          <Route path="/about"></Route>
-          <Route path="/">{Home}</Route>
-        </Switch>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ScrollToTop>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/about"></Route>
+            </Switch>
+          </ScrollToTop>
+        </Suspense>
       </Router>
-    </>
+    </ViewportProvider>
   );
-};
+}
 
 export default App;
