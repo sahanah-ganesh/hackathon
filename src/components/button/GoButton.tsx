@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Text, Button } from "rebass/styled-components";
 
 const ButtonBox = styled(Button)`
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 34px;
   background-color: #a5e4ff;
   outline: none;
@@ -15,7 +15,7 @@ const ButtonBox = styled(Button)`
 
 const ButtonTitle = styled(Text)`
   color: #292d47;
-  font-size: 27px;
+  font-size: 20px;
   font-weight: 600;
 `;
 

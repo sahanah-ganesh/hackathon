@@ -13,8 +13,9 @@ import { Text, Link, Box } from "rebass/styled-components";
 import { useTranslation } from "react-i18next";
 /* cra built upon webpack with support for code splitting
 lazily load components with suspense while waiting for dynamic imports */
-const Home = lazy(() => import("./pages/home/home"));
-const Chat = lazy(() => import("./pages/chat/chat"));
+const Home = lazy(() => import("./pages/home/Home"));
+const Chat = lazy(() => import("./pages/chat/Chat"));
+const Login = lazy(() => import("./pages/login/Login"));
 
 function _ScrollToTop(props: any) {
   const { pathname } = useLocation();
@@ -66,7 +67,7 @@ function App() {
                   <Chat />
                 </Route>
                 <Route exact path="/login">
-                  <Chat />
+                  <Login />
                 </Route>
               </Switch>
             </ScrollToTop>

@@ -59,7 +59,7 @@ const Menu = () => {
   return (
     <div style={{ padding: "1rem" }} ref={node}>
       <StyledMenu open={open}>
-        <Links to="/">{t("links.home")}</Links>
+        <Links to="/login">{t("links.login")}</Links>
         <ExternalLink target="_blank" href="https://www.google.com/">
           {t("links.google")}
         </ExternalLink>
