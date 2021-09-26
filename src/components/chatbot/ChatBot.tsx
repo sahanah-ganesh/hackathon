@@ -1,94 +1,50 @@
-import { FormEvent, useState } from "react";
-import { analysis } from "../../utils/analysis";
-import { Box, Button } from "rebass/styled-components";
-import { Input } from "@rebass/forms";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Box } from "rebass/styled-components";
 import styled from "styled-components";
 import Chats from "../chats/Chats";
 
 const ChatContainer = styled(Box)`
-  width: 50vw;
+  width: 100vw;
   height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 0.5px solid white;
   padding: 2em;
-  border-radius: 10px;
-  background-color: white;
-`;
-
-const FormContainer = styled(Box)`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const TextInput = styled(Input)`
-  width: 92%;
-  border-style: none;
-  border: 0.5px solid black;
-  border-radius: 10px;
-  padding: 0.5em;
-  font-size: 1em;
-  &:focus {
-    outline: none;
-  }
-`;
-
-const SendButton = styled(Button)`
-  background: grey;
-  color: black;
-  border-style: none;
-  border-radius: 10px;
-  padding: 0.5em;
-  font-size: 1em;
-  &:hover {
-    opacity: 0.8;
-    cursor: pointer;
-  }
+  background-color: transparent;
 `;
 
 interface ResponseObject {
-  purpose: string;
   message: string;
-  options?: string[];
   sender: string;
 }
 
-const ChatBot = (): JSX.Element => {
-  const [userResponse, setUserResponse] = useState<string>("");
-  const [step, setStep] = useState<number>(0);
+interface IProps {
+  option: string;
+  setOption: any;
+}
+
+const ChatBot: React.FC<IProps> = ({ option, setOption }) => {
+  const [userResponse, setUserResponse] = useState(option);
   const [botResponse, setBotResponse] = useState<ResponseObject>({
-    purpose: "",
     message: "",
     sender: "bot",
   });
   const [sendUserResponse, setSendUserResponse] = useState<string>("");
+  const { t } = useTranslation();
 
-  // setting next step when there's response and option click
-  const setNextStep = (response: string) => {
-    setStep((prevState) => prevState + 1);
-    setSendUserResponse(response);
-    let res = analysis(step, response);
-    setBotResponse({ ...res, sender: "bot" });
-    setUserResponse("");
-  };
-
-  const optionClick = (e: React.MouseEvent<HTMLElement>) => {
-    let option = e.currentTarget.dataset.id;
+  useEffect(() => {
     if (option) {
-      setNextStep(option);
+      setOption("");
+      setSendUserResponse(option);
+      let res = t("chat.second");
+      setBotResponse({ message: res, sender: "bot" });
+      setTimeout(() => {
+        setUserResponse("");
+      }, 1000);
     }
-  };
-
-  // event handlers
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserResponse(e.target.value);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setNextStep(userResponse);
-  };
+    // eslint-disable-next-line
+  }, [option]);
 
   return (
     <ChatContainer>
@@ -96,18 +52,7 @@ const ChatBot = (): JSX.Element => {
         userResponse={userResponse}
         botResponse={botResponse}
         sendUserResponse={sendUserResponse}
-        optionClick={optionClick}
       />
-      <FormContainer
-        as="form"
-        onSubmit={(e: FormEvent<HTMLFormElement>): void => handleSubmit(e)}
-      >
-        <TextInput
-          onChange={(e) => handleInputChange(e)}
-          value={userResponse}
-        ></TextInput>
-        <SendButton>Send</SendButton>
-      </FormContainer>
     </ChatContainer>
   );
 };

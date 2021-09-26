@@ -5,7 +5,7 @@ import BannerNav from "../../components/nav/BannerNav";
 
 const Home = (): JSX.Element => {
   return (
-    <Box>
+    <Box height="100vh" style={{ position: "relative" }}>
       <NavBar />
       <BannerNav />
       <Hero />

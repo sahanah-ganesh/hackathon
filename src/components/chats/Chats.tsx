@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, Text } from "rebass/styled-components";
+import { Box, Text, Image } from "rebass/styled-components";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import Sarah from "../../assets/Sarah.svg";
 
 const Dummy = styled(Box)`
   padding: 0.5em 0;
@@ -14,32 +16,55 @@ const MessageContainer = styled(Box)`
 const MessageWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
+  padding-bottom: 1rem;
 `;
 
 const UserMessage = styled(Box)`
-  max-width: 400px;
-  padding: 0.5em;
+  position: relative;
+  padding: 1rem;
   border-radius: 17px;
   overflow-wrap: break-word;
   background: white;
-  color: grey;
-  align-self: flex-end;
+  color: black;
+  margin-left: 2rem;
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 20%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: white;
+    border-bottom: 0;
+    border-right: 0;
+    margin-left: -10px;
+    margin-bottom: -20px;
+  }
 `;
 
 const BotMessage = styled(Box)`
-  max-width: 400px;
-  padding: 0.5em;
+  position: relative;
+  padding: 1em;
+  margin-right: 2rem;
   border-radius: 17px;
   overflow-wrap: break-word;
-  background: grey;
-  color: white;
-  align-self: flex-start;
-`;
-
-const Options = styled(Box)`
-  background: white;
-  display: flex;
-  align-items: center;
+  background-color: white;
+  color: black;
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: white;
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -10px;
+    margin-bottom: -20px;
+  }
 `;
 
 const ChatText = styled(Text)`
@@ -51,22 +76,25 @@ const ChatText = styled(Text)`
   }
 `;
 
+const StyledText = styled(Text)`
+  color: #f4eeeb;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 1rem 1rem 1rem 1rem;
+  text-transform: uppercase;
+`;
+
 interface Props {
   userResponse: string;
   botResponse: {
-    purpose: string;
     message: string;
-    options?: string[];
     sender: string;
   };
   sendUserResponse: string;
-  optionClick: (ev: React.MouseEvent<HTMLElement>) => void;
 }
 
 interface MessagesInfo {
-  purpose?: string;
   message: string;
-  options?: string[];
   sender: string;
 }
 
@@ -74,14 +102,13 @@ const Chats: React.FC<Props> = (props) => {
   const [messages, setMessages] = useState<MessagesInfo[]>([]);
   const dummyRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
-  // stacking up messages
   useEffect(() => {
     if (messages.length === 0) {
       setMessages([
         {
-          purpose: "introduction",
-          message: "Hi what's your name?",
+          message: t("chat.first"),
           sender: "bot",
         },
       ]);
@@ -114,27 +141,30 @@ const Chats: React.FC<Props> = (props) => {
       {messages.map((chat) => (
         <MessageWrapper key={chat.message}>
           {chat.sender === "user" ? (
-            <UserMessage key={chat.sender}>
-              <ChatText>{chat.message}</ChatText>
-            </UserMessage>
+            <Box>
+              <UserMessage key={chat.sender}>
+                <ChatText>{chat.message}</ChatText>
+              </UserMessage>
+              <Box
+                display="flex"
+                flexDirection="row"
+                justifyContent="flex-end"
+                pt="1rem"
+              >
+                <StyledText>{t("chat.you")}</StyledText>
+              </Box>
+            </Box>
           ) : (
-            <BotMessage key={chat.sender}>
-              <Text>{chat.message}</Text>
-            </BotMessage>
+            <Box>
+              <BotMessage key={chat.sender}>
+                <Text>{chat.message}</Text>
+              </BotMessage>
+              <Box display="flex" flexDirection="row" pt="2rem">
+                <Image height="50px" width="50px" src={Sarah} />
+                <StyledText>{t("chat.name")}</StyledText>
+              </Box>
+            </Box>
           )}
-          {chat.options ? (
-            <Options>
-              {chat.options.map((option) => (
-                <ChatText
-                  onClick={(e) => props.optionClick(e)}
-                  data-id={option}
-                  key={option}
-                >
-                  {option}
-                </ChatText>
-              ))}
-            </Options>
-          ) : null}
           <Dummy ref={dummyRef}></Dummy>
         </MessageWrapper>
       ))}

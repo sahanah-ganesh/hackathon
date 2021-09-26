@@ -27,7 +27,11 @@ export const LoginForm: React.FC = () => {
       <Box pb="4rem">
         <Box pb="2rem">
           <StyledLabel>{t("login.nickname")}</StyledLabel>
-          <StyledInput id="nickname" name="nickname" placeholder="Jane" />
+          <StyledInput
+            id="nickname"
+            name="nickname"
+            placeholder={t("login.placeholderName")}
+          />
         </Box>
         <Box>
           <StyledLabel>{t("login.postcode")}</StyledLabel>

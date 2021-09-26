@@ -69,7 +69,6 @@ const Menu = () => {
         <ExternalLink target="_blank" href={t("links.familyViolence")}>
           {t("links.family")}
         </ExternalLink>{" "}
-        <Links to="/start">{t("links.start")}</Links>
       </StyledMenu>
       <Hamburger open={open} setOpen={setOpen} />
     </div>

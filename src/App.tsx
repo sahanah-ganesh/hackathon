@@ -16,6 +16,14 @@ lazily load components with suspense while waiting for dynamic imports */
 const Home = lazy(() => import("./pages/home/Home"));
 const Chat = lazy(() => import("./pages/chat/Chat"));
 const Login = lazy(() => import("./pages/login/Login"));
+const Guide = lazy(() => import("./pages/guide/Guide"));
+const Signup = lazy(() => import("./pages/signup/Signup"));
+const Potato = lazy(() => import("./pages/potato/Potato"));
+declare global {
+  interface Window {
+    analytics: any;
+  }
+}
 
 function _ScrollToTop(props: any) {
   const { pathname } = useLocation();
@@ -27,9 +35,17 @@ function _ScrollToTop(props: any) {
 
 const ScrollToTop = withRouter(_ScrollToTop);
 
+function usePageViews() {
+  const location = useLocation();
+  useEffect(() => {
+    window.analytics.page(location.pathname);
+  }, [location]);
+}
+
 function App() {
   const { t } = useTranslation();
   const { isLatestVersion, emptyCacheStorage } = useClearCache();
+  usePageViews();
   return (
     <>
       {!isLatestVersion && (
@@ -68,6 +84,18 @@ function App() {
                 </Route>
                 <Route exact path="/login">
                   <Login />
+                </Route>
+                <Route exact path="/guide">
+                  <Guide />
+                </Route>
+                <Route exact path="/chat">
+                  <Chat />
+                </Route>
+                <Route exact path="/signup">
+                  <Signup />
+                </Route>
+                <Route exact path="/potato">
+                  <Potato />
                 </Route>
               </Switch>
             </ScrollToTop>

@@ -4,9 +4,14 @@ import { Box, Text } from "rebass/styled-components";
 interface ITitleTextProps {
   title: string;
   paddingTop?: string;
+  paddingBottom?: string;
 }
 
-export const TitleText: React.FC<ITitleTextProps> = ({ title, paddingTop }) => {
+export const TitleText: React.FC<ITitleTextProps> = ({
+  title,
+  paddingTop,
+  paddingBottom,
+}) => {
   return (
     <Box>
       <Text
@@ -16,7 +21,7 @@ export const TitleText: React.FC<ITitleTextProps> = ({ title, paddingTop }) => {
           paddingLeft: "1rem",
           paddingRight: "1rem",
           paddingTop: paddingTop ? paddingTop : "1rem",
-          paddingBottom: "3rem",
+          paddingBottom: paddingBottom ? paddingBottom : "3rem",
         }}
       >
         {title}
