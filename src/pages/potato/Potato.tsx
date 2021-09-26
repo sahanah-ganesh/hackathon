@@ -29,7 +29,7 @@ const Potato = (): JSX.Element => {
       <Box display="flex" justifyContent="center">
         <Image src={Potato2} />
       </Box>
-      <ButtonBox title={t("buttons.continue")} link="/" />
+      <ButtonBox title={t("buttons.continue")} link="/create" />
     </Box>
   );
 };

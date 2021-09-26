@@ -63,18 +63,8 @@ export const en = {
     title: "Your dummy password is 'Potato2'",
     text: "If you're ever in a situation where you're asked or pressured into giving your password for this service, 'Potato2' will take you to dummy content.",
   },
-  plan: {
-    plan: "Personalized plan",
-    myPlan: "My Plan",
-    safety: "Safety",
-    safetyText: "Here you'll learn the best advice for keeping everyone safe.",
-    start: "Start",
-    safetyTime: "2 mins",
-    housing: "Housing",
-    housingTime: "1 hour",
-    mental: "Mental Health",
-    mentalTime: "20 mins",
-    financial: "Financial",
-    financialTime: "11 mins",
+  create: {
+    title: "We're creating your custom plan",
+    text: "The steps have been ordered in a way that helps you plan. Complete in whatever order works best for you.",
   },
 };

@@ -19,6 +19,7 @@ const Login = lazy(() => import("./pages/login/Login"));
 const Guide = lazy(() => import("./pages/guide/Guide"));
 const Signup = lazy(() => import("./pages/signup/Signup"));
 const Potato = lazy(() => import("./pages/potato/Potato"));
+const Create = lazy(() => import("./pages/create/Create"));
 declare global {
   interface Window {
     analytics: any;
@@ -96,6 +97,9 @@ function App() {
                 </Route>
                 <Route exact path="/potato">
                   <Potato />
+                </Route>
+                <Route exact path="/create">
+                  <Create />
                 </Route>
               </Switch>
             </ScrollToTop>
