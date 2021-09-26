@@ -65,6 +65,9 @@ function App() {
                 <Route exact path="/start">
                   <Chat />
                 </Route>
+                <Route exact path="/login">
+                  <Chat />
+                </Route>
               </Switch>
             </ScrollToTop>
           </Suspense>

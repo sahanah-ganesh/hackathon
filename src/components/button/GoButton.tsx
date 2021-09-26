@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { Text, Button } from "rebass/styled-components";
 
 const ButtonBox = styled(Button)`
+  padding: 1rem;
   border-radius: 34px;
-  background-color: #95b5dd;
+  background-color: #a5e4ff;
   outline: none;
   width: 100%;
   &:hover {
@@ -13,19 +14,23 @@ const ButtonBox = styled(Button)`
 `;
 
 const ButtonTitle = styled(Text)`
-  color: white;
-  padding: 1rem;
-  font-size: 17px;
-  font-weight: 200;
+  color: #292d47;
+  font-size: 27px;
+  font-weight: 600;
 `;
 
 interface IButtonProps {
   title?: string;
   onClick?: () => void;
+  padding?: string;
 }
 
-export const GoButton: React.FC<IButtonProps> = ({ title, onClick }) => (
+export const GoButton: React.FC<IButtonProps> = ({
+  title,
+  onClick,
+  padding,
+}) => (
   <ButtonBox onClick={onClick}>
-    <ButtonTitle>{title}</ButtonTitle>
+    <ButtonTitle p={padding}>{title}</ButtonTitle>
   </ButtonBox>
 );

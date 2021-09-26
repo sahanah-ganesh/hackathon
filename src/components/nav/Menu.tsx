@@ -30,7 +30,9 @@ const Links = styled(Link)`
   text-decoration: none;
   text-align: center;
   :hover {
-    color: #95b5dd;
+    text-decoration: underline;
+    border: 1px white solid;
+    border-radius: 34px;
   }
 `;
 
@@ -41,7 +43,9 @@ const ExternalLink = styled.a`
   text-decoration: none;
   text-align: center;
   :hover {
-    color: #95b5dd;
+    text-decoration: underline;
+    border: 1px white solid;
+    border-radius: 34px;
   }
 `;
 
@@ -53,14 +57,17 @@ const Menu = () => {
   useOnClickOutside(node, () => setOpen(false));
 
   return (
-    <div ref={node}>
+    <div style={{ padding: "1rem" }} ref={node}>
       <StyledMenu open={open}>
         <Links to="/">{t("links.home")}</Links>
+        <ExternalLink target="_blank" href="https://www.google.com/">
+          {t("links.google")}
+        </ExternalLink>
         <ExternalLink target="_blank" href={t("links.urgentHelp")}>
           {t("links.help")}
         </ExternalLink>
         <ExternalLink target="_blank" href={t("links.familyViolence")}>
-          {t("links.violence")}
+          {t("links.family")}
         </ExternalLink>{" "}
         <Links to="/start">{t("links.start")}</Links>
       </StyledMenu>

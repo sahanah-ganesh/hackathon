@@ -1,42 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Text, Box, Image } from "rebass/styled-components";
-import { useViewport } from "../../hooks/useViewport";
-import HeroLogo from "../../assets/HeroLogo.svg";
+import Dandelion from "../../assets/Dandelion.svg";
 import { GoButton } from "../button/GoButton";
 import { useTranslation } from "react-i18next";
 
 interface ITitleTextProps {
   title: string;
-  text?: string;
-  moreText?: string;
-  whiteText?: boolean;
 }
-export const Hero: React.FC<ITitleTextProps> = ({
-  title,
-  text,
-  moreText,
-  whiteText = false,
-}) => {
+export const Hero: React.FC<ITitleTextProps> = ({ title }) => {
   const { t } = useTranslation();
-  const { width } = useViewport();
-  const breakpoint = 900;
   return (
     <Box
       style={{
-        padding: "1rem 10rem 1rem 10rem",
+        padding: "1rem",
         backgroundColor: "#303246",
       }}
     >
       <Box
         display="flex"
-        flexDirection={width > breakpoint ? "row" : "column"}
-        justifyContent="space-around"
+        flexDirection="column"
+        justifyContent="center"
         alignItems="center"
       >
-        <Box width="50%">
-          <Image src={HeroLogo} />
-        </Box>
-        <Box width="50%">
+        <Box width="100%">
           <Text
             style={{
               color: "#F4EEEB",
@@ -46,40 +33,14 @@ export const Hero: React.FC<ITitleTextProps> = ({
           >
             {title}
           </Text>
+        </Box>
+        <Box width="100%">
+          <Image src={Dandelion} />
+        </Box>
+        <Link to="/start" style={{ width: "100%" }}>
           <GoButton title={t("buttons.go")} />
-        </Box>
+        </Link>
       </Box>
-      {text && (
-        <Box
-          style={{ padding: "1rem", display: "flex", justifyContent: "center" }}
-        >
-          <Box width={width > breakpoint && !whiteText ? "50%" : "100%"}>
-            <Text
-              style={{
-                color: whiteText ? "white" : "#F4EEEB",
-                fontSize: "17px",
-                textAlign: "center",
-                lineHeight: 2,
-              }}
-            >
-              {text}
-            </Text>
-            {moreText && (
-              <Text
-                style={{
-                  color: "#F4EEEB",
-                  fontSize: "17px",
-                  textAlign: "center",
-                  lineHeight: 2,
-                  paddingTop: "2rem",
-                }}
-              >
-                {moreText}
-              </Text>
-            )}
-          </Box>
-        </Box>
-      )}
     </Box>
   );
 };

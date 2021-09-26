@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     margin: 0;
     background-color: #303246;
-    font-family: 'Cera Pro',
+    font-family: 'Lelo',
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
